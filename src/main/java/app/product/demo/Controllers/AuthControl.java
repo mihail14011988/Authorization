@@ -19,10 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/registration") //вход регистрации
 public class AuthControl {
     @Autowired
-    private ServiceAuth authService;
+    private final ServiceAuth authService;
     
+
 // Представление формы на клиента, использование bootstrap
-@GetMapping()    
+@GetMapping  
 public String showFormsRegistration(){
     return "registration";
 }  
@@ -34,8 +35,9 @@ public String showFormsRegistration(){
     }
 
 //Передача с формы данных успешной регистрации Entity(column= "userLogin")  
-@PostMapping()
+@PostMapping
 public String registrAccount(@ModelAttribute("userLogin") UserRegistrationDTO userDTO){
+    
 authService.save(userDTO);
 return "redirect:/registration?success";
    };

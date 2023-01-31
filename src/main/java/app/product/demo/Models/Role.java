@@ -23,6 +23,8 @@ public class Role {
     public Role(String nameRole) {
         this.nameRole = nameRole;
     }
+    public Role() {
+    }
 
     public Long getId() {
         return id;
@@ -39,5 +41,6 @@ public class Role {
     public void setNameRole(String nameRole) {
         this.nameRole = nameRole;
     }
-    
+
+        
 }

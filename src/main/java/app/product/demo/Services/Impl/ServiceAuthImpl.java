@@ -6,11 +6,13 @@ package app.product.demo.Services.Impl;
 
 import app.product.demo.Models.User;
 import app.product.demo.Services.DTO.UserRegistrationDTO;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-/**
- *
- * @author Miha
- */
-public interface ServiceAuthImpl {
+
+public interface ServiceAuthImpl extends UserDetailsService {
     User save(UserRegistrationDTO registrationDTO);
+    @Override
+    UserDetails loadUserByUsername(String username);
+  
 }
