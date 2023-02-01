@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package app.product.demo.Controllers;
 
 import app.product.demo.Services.ServiceAuth;
@@ -11,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,27 +15,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @AllArgsConstructor
 @RequestMapping("/registration") //вход регистрации
 public class AuthControl {
+
     @Autowired
     private final ServiceAuth authService;
-    
 
 // Представление формы на клиента, использование bootstrap
-@GetMapping  
-public String showFormsRegistration(){
-    return "registration";
-}  
+    @GetMapping
+    public String showFormsRegistration() {
+        return "registration";
+    }
 
 // Создаётся новый userDto с формы;
- @ModelAttribute("userLogin")
-    public UserRegistrationDTO userDto(){
-    return new UserRegistrationDTO();
+    @ModelAttribute("userLogin")
+    public UserRegistrationDTO userDto() {
+        return new UserRegistrationDTO();
     }
 
 //Передача с формы данных успешной регистрации Entity(column= "userLogin")  
-@PostMapping
-public String registrAccount(@ModelAttribute("userLogin") UserRegistrationDTO userDTO){
-    
-authService.save(userDTO);
-return "redirect:/registration?success";
-   };
+    @PostMapping
+    public String registrAccount(@ModelAttribute("userLogin") UserRegistrationDTO userDTO) {
+        if (authService.saveDTO(userDTO)) {
+            return "redirect:/registration?success";
+        }
+
+        return "redirect:/registration?unsuccess";
+    }
+;
+
+
 }

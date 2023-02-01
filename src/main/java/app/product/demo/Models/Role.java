@@ -10,7 +10,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity()
 @Table(name="role")
 public class Role {
@@ -19,28 +29,8 @@ public class Role {
     private Long id;
     @Column(name="nameRoleUser")
     private String nameRole;
-
-    public Role(String nameRole) {
-        this.nameRole = nameRole;
+    
+    public Role(String nameRole){
+        this.nameRole=nameRole;
     }
-    public Role() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNameRole() {
-        return nameRole;
-    }
-
-    public void setNameRole(String nameRole) {
-        this.nameRole = nameRole;
-    }
-
-        
 }

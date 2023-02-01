@@ -39,12 +39,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <form th:action="@{/registration}" method="post" th:object="${userLogin}"> 
                         <div class="form-group">
                             <!--поля передаются  USER_DTO-->
+                          
                             <label class="control-label" for="name">Введите имя</label>
                             <input class="form-control" id="name" th:field="*{name}" required autofocus="autofocus"/><br>
                             <label class="control-label" for="surname">Введите фамилию</label>
                             <input class="form-control" id="surname" th:field="*{surname}" required autofocus="autofocus"/><br>
-                            <label class="control-label" for="email">Введите email</label>
-                            <input class="form-control" id="email" th:field="*{email}" required autofocus="autofocus"/><br>
+                            <label class="control-label"  for="email">Введите email</label>
+                            <input class="form-control" type="email" id="email" th:field="*{email}" required autofocus="autofocus"/><br>
                             <label class="control-label" for="password">Введите пароль</label>
                             <input class="form-control" id="password" th:field="*{password}" required autofocus="autofocus"/> <br> 
                             <div class="form-group">
@@ -57,7 +58,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <div th:if="${param.success}">
                         <div class="alert alert-info">Вы успешно зарегистрировались, пожалуйста потвердите почту</div>
                     </div>
-
+                    <div th:if="${param.unsuccess}">
+						<div class="alert alert-danger">Такой User существует.</div>
+					</div>
 
                     </body>
                     </html>

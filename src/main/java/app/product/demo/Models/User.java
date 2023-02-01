@@ -5,6 +5,7 @@
 package app.product.demo.Models;
 
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +18,16 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-//без lombok
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "userLogin", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
@@ -32,7 +41,7 @@ public class User {
     private String surname;
     private String email;
     private String password;
-
+    @Getter  
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -40,56 +49,12 @@ public class User {
     )
     private Collection<Role> roles;
 
-    public User() {
+    public User(String name, String surname, String email, String encode, List<Role> asList) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public User(String name, String surname, String email, String password, Collection<Role> roles) {
-        this.firstname = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
+    
 
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return firstname;
-    }
-
-    public void setName(String name) {
-        this.firstname = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Collection<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
-    }
+   
 
 }

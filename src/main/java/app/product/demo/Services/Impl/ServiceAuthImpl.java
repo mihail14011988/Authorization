@@ -14,5 +14,5 @@ public interface ServiceAuthImpl extends UserDetailsService {
     User save(UserRegistrationDTO registrationDTO);
     @Override
     UserDetails loadUserByUsername(String username);
-  
+    boolean saveDTO(UserRegistrationDTO registrationDTO);
 }

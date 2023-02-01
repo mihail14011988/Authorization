@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package app.product.demo.Controllers;
 
 import app.product.demo.Services.ServiceAuth;
@@ -14,15 +10,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @AllArgsConstructor
 public class AuthControlUser {
- @Autowired
+
+    @Autowired
     private ServiceAuth authService;
- 
- @GetMapping("/login")
- public String login(){
- return "login";
- }
- @GetMapping("/")
-public String home() {
-return "index";
-	}
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/")
+    public String home() {
+        return "index";
+    }
 }
