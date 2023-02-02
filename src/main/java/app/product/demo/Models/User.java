@@ -48,10 +48,20 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Collection<Role> roles;
+    @Column(name="activeCode")
+    private boolean activeCode=false;
+    private String activationCode;
 
-    public User(String name, String surname, String email, String encode, List<Role> asList) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   public User(String name, String surname, String email, String encode, List<Role> asList, boolean active) {
+   this.firstname=name;
+   this.surname=surname;
+   this.email=email;
+   this.password=encode;
+   this.roles=asList;
+   this.activeCode=active;
     }
+
+    
 
     
 
