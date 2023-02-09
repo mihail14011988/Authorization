@@ -1,5 +1,6 @@
 package app.product.demo.Controllers;
 
+import app.product.demo.Models.User;
 import app.product.demo.Services.ServiceAuth;
 import app.product.demo.Services.DTO.UserRegistrationDTO;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthControl {
 
     @Autowired
-    private final ServiceAuth authService;
+    private ServiceAuth authService;
 
 // Представление формы на клиента, использование bootstrap
     @GetMapping
@@ -41,7 +42,6 @@ public class AuthControl {
 
         return "redirect:/registration?unsuccess";
     }
-
     
 
 }

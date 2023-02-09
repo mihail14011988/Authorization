@@ -16,5 +16,6 @@ public class UserRegistrationDTO {
     private String surname;
     private String email;
     private String password;
+    private String repeat;
 
 }

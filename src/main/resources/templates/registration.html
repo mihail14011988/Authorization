@@ -49,6 +49,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <label class="control-label" for="password">Введите пароль</label>
                             <input class="form-control" id="password" th:field="*{password}" required autofocus="autofocus"/> <br> 
                             <div class="form-group">
+                            <label class="control-label" for="repeat">Повторите пароль</label>    
+                            <input class="form-control" id="repeat" th:field="*{repeat}" required autofocus="autofocus"/> <br> 
+                            <div class="form-group">
                                     <button type="submit" class="btn btn-success">Зарегистрироваться</button>
                                     <span>Уже зарегистрированы? <a href="/" th:href="@{/login}"> Войти<a/><span/>
                                 </div>
@@ -59,8 +62,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <div class="alert alert-info">Вы успешно зарегистрировались, пожалуйста потвердите почту</div>
                     </div>
                     <div th:if="${param.unsuccess}">
-						<div class="alert alert-danger">Такой User существует.</div>
+						<div class="alert alert-danger">Такой User существует или пароли не совпадают.</div>
 					</div>
-
+                   
                     </body>
                     </html>

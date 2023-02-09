@@ -20,19 +20,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @RequiredArgsConstructor
 @Service
 public class ServiceAuth implements ServiceAuthImpl {
-   
+
     @Autowired
     private RepoAuth repoAuth;
     @Autowired
     private BCryptPasswordEncoder bCript;
     @Autowired
     private ServiceMail serviceMail;
+
     @Override
     public User save(UserRegistrationDTO registrationDTO) {
         User userDB = repoAuth.findByEmail(registrationDTO.getEmail());
         if (userDB == null) {
             userDB = new User(registrationDTO.getName(), registrationDTO.getSurname(), registrationDTO.getEmail(),
-                    bCript.encode(registrationDTO.getPassword()), Arrays.asList(new Role("ROLE_USER")),false);
+                    bCript.encode(registrationDTO.getPassword()), Arrays.asList(new Role("ROLE_USER")), false);
             repoAuth.save(userDB);
         }
         return userDB;
@@ -58,18 +59,33 @@ public class ServiceAuth implements ServiceAuthImpl {
         if (user != null) {
             return false;
         }
+        if(!registrationDTO.getPassword().equals(registrationDTO.getRepeat())){        
+         return false;}
         User user1 = new User(registrationDTO.getName(), registrationDTO.getSurname(), registrationDTO.getEmail(),
-                bCript.encode(registrationDTO.getPassword()), Arrays.asList(new Role("ROLE_USER")),false);
-        
+                bCript.encode(registrationDTO.getPassword()), Arrays.asList(new Role("ROLE_USER")), false);
+
         user1.setActivationCode(UUID.randomUUID().toString());
-               
-        String message=String.format("Hello!, %s \n"
+
+        String message = String.format("Hello!, %s \n"
                 + "You activation code: http://localhost:8080/activate/%s",
                 user1.getFirstname(),
                 user1.getActivationCode());
         serviceMail.sendActivationCode(user1.getEmail(), "Activation code", message);
-        repoAuth.save(user1);
+        repoAuth.save(user1);       
         return true;
     }
+
+    @Override
+    public boolean getByEmail(String email, UserRegistrationDTO dto) {
+        User user = repoAuth.findByEmail(dto.getEmail());
+        if(user==null) {return false;}
+        if (dto.getPassword().equals(dto.getRepeat())){
+            user.setPassword(bCript.encode(dto.getPassword()));
+        repoAuth.save(user);
+            return true;}
+        
+        return false;
+    }
+;
 
 }

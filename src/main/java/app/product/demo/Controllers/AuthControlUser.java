@@ -25,9 +25,5 @@ public class AuthControlUser {
     public String home() {
         return "index";
     }
-    //Потверждение учетной записи
-    @GetMapping("/activate/{code}")
-    public String getCodeActivate(Model model, @PathVariable String code){
-    return "/login?activated";
-        }
+    
 }
